@@ -1,0 +1,175 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    /* background: #fff; */
+    background-size: 100% 100%;
+background-position: 0px 0px,0px 0px,0px 0px,0px 0px,0px 0px;
+background-image: repeating-linear-gradient(315deg, #00FFFF2E 92%, #073AFF00 100%),repeating-radial-gradient(75% 75% at 238% 218%, #00FFFF12 30%, #073AFF14 39%),radial-gradient(99% 99% at 109% 2%, #00C9FFFF 0%, #073AFF00 100%),radial-gradient(99% 99% at 21% 78%, #7B00FFFF 0%, #073AFF00 100%),radial-gradient(160% 154% at 711px -303px, #2000FFFF 0%, #073AFFFF 100%);
+}
+.gallery{
+    margin: 30px;
+    width: 1200px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 100px;
+    gap: 0px 20px;
+    width: clamp(70vmin, 900px, 90%);
+    /* background-size: 100% 100%;
+background-position: 0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px;
+background-image: radial-gradient(18% 28% at 24% 50%, #CEFAFFFF 7%, #073AFF00 100%),radial-gradient(18% 28% at 18% 71%, #FFFFFF59 6%, #073AFF00 100%),radial-gradient(70% 53% at 36% 76%, #73F2FFFF 0%, #073AFF00 100%),radial-gradient(42% 53% at 15% 94%, #FFFFFFFF 7%, #073AFF00 100%),radial-gradient(42% 53% at 34% 72%, #FFFFFFFF 7%, #073AFF00 100%),radial-gradient(18% 28% at 35% 87%, #FFFFFFFF 7%, #073AFF00 100%),radial-gradient(31% 43% at 7% 98%, #FFFFFFFF 24%, #073AFF00 100%),radial-gradient(21% 37% at 72% 23%, #D3FF6D9C 24%, #073AFF00 100%),radial-gradient(35% 56% at 91% 74%, #8A4FFFF5 9%, #073AFF00 100%),radial-gradient(74% 86% at 67% 38%, #6DFFAEF5 24%, #073AFF00 100%),linear-gradient(125deg, #4EB5FFFF 1%, #4C00FCFF 100%); */
+
+}
+.gallery:has(img:hover) img:not(:hover){
+    filter: grayscale();
+}
+.gallery img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(0 20px,100% 0,100% calc(100% - 20px),0 100%);
+    border: 5px solid rgb(0, 0, 0);
+    transition: transform 0.5s, clip-path 0.5s, filter 0.75s;
+    transform: scale(1);
+    cursor: pointer;
+    /* display: none; */
+}
+.gallery img:nth-child(3n){
+    grid-row: span 2;
+}
+.gallery img:nth-child(2){
+    grid-row: span 2;
+}
+.gallery img:nth-child(14n){
+    grid-row: span 2;
+}
+.gallery img:nth-last-child(-n+3){
+    grid-row: span 2;
+}
+.gallery img:hover{
+    transform: scale(1.4);
+    border-radius: 15px;
+    z-index: 1;
+    width: 100%;
+    clip-path: polygon(0 0, 100% 0, 100% 100%,0 100%);
+    border: 5px solid rgb(255, 255, 255);
+}
+.gallery .spacer{
+    background: rgb(0, 0, 0);
+    border-radius: 15px;
+    clip-path: polygon(0 20px, 100% 0, 100% calc(100% - 20px),0 100%);
+}
+.spacer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+   
+}
+.spacer p{
+    margin: 5px;
+    text-align: center;
+    font-family: cursive;
+}
+.photos{
+    display: none;
+}
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    font-family: cursive;
+}
+#text{
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    width: 430px;
+    border: none;
+    outline: none;
+    font-family: cursive;
+}
+#enter{
+    width: 300px;
+    padding: 20px;
+    font-size: 1.4rem;
+    border-radius: 20px;
+    border: none;
+    font-family: cursive;
+    background-color: rgb(190, 46, 142);
+    cursor: pointer;
+}
+#showPopup {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ff5e5e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#showPopup:hover {
+    background-color: #ff3e3e;
+}
+
+/* Popup container (hidden by default) */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Dark background */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Make sure it's on top */
+}
+
+/* Popup content (the card itself) */
+.popup-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    max-width: 90%;
+}
+
+/* Emoji style */
+.emoji {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+/* Message style */
+.message p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Close button */
+.close-btn {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    background-color: #0056b3;
+}
